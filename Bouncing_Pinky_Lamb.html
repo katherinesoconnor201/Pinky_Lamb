@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Bouncing Circle</title>
+        <style>
+            /*#circle {
+                position: absolute;
+                height: 50px;
+                width: 50px;
+                background-color: coral;
+                border-radius: 50%;
+                left: 0px;
+                top:100px;
+            }
+            */
+            #pinky_lamb{
+              position: absolute;
+              left: 0px;
+              top:100px;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="circle"></div>
+    <p id="txt"></p>
+    <img  id="pinky_lamb" src="https://lh3.googleusercontent.com/cCx22KgA60sgDmxnjmDj2a5qcl14q6Ayf3IlvPgEnOeed7GX7rIp2RdOnzOi352fAbqGoqp5u-3TOU0uH5GZnAQHvluXGZnAesa0d5BQqhf-AGZ8X5G1M2qPmoG2mmmKmUOMdxEqcQD_G1Z19tMfPyQHQlJ9yS8GXj_Xdqf9G1y0IYYdsGc2och4yXn7vH516Rx8gf3SeRj58S0pBLXqq7A1KL3kNY7Tty1hS6rVjuIy7Fv2a7Nnd_HvxXNzmu0n7p5TWBNOA9cC98UgNuAswhazTF2Aa3_rUAKZEEI5W-zIopFRL8l3BAhfGb7AHuqb-txVg9bGSt8ANT5WR1uB3Vm3Z8bBS2nQswX3UeC3-j_Hld_TdUbXanZ-LjBj7UUzGs0sZ2s-W13yXQtk3emLhMliXHPuJENb0DDdkSe09pjBkxYz0jTBSyaiZfujadtmzFjy1AoMtDhEtK9V3VPRS3hTBJ3Sod74yD2XdFKUW-CnAIIstveDTKClHVDGUucukqYu3_QFLcWb9cCbJJrSnFpXcyX3_aqhIP6F7TURvL5zM7PgfXy9pcu7_7inwua6Ccsjk-tvns2WyE5etz3J6Kf6TcK3nRBb3d2muc6NCfLijkpI4_x28W1ktFi9LrthfOQBvTkZmsF9nIlCt8OrWQXO56nC39gWm5s-fzEq4AuZCvqqkrEz8hQKp9WopKdF-3lvrCoVMctMLYCsjSIpo2LI=w555-h625-no" alt="Pinky Lamb" height="100">
+    
+  <script>
+  var c = document.getElementById("pinky_lamb");
+  var t = document.getElementById("txt");
+  var X_step = 2;
+  var Y_step = 2;
+  var x = 0;
+  var y = 0
+  
+  var move = function() {
+      x = x + X_step;
+      y = y + Y_step;
+      if(x>=(window.innerWidth-60) || x<=0){
+          X_step = -1*X_step;
+          t.textContent+="Daboo Daboo... ";
+      }
+      if(y>=(window.innerHeight-100) || y<=0){
+          Y_step = -1*Y_step;
+      }
+      c.style.left = x + "px";
+      c.style.top = y + "px";
+      //t.textContent = "(" + x + ", " + ")";
+  };
+var timer = window.setInterval(move, 10);
+  </script>
+
+    </body>
+</html>
