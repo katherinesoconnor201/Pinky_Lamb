@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Fly Pinky Lamb</title>
+        <style>
+            /*#circle {
+                position: absolute;
+                height: 50px;
+                width: 50px;
+                background-color: coral;
+                border-radius: 50%;
+                left: 0px;
+                top:100px;
+            }
+            */
+            #pinky_lamb{
+              position: absolute;
+              left: 100px;
+              top:100px;
+            }
+
+            #rectangle{
+              position: absolute;
+              left:window.innerWidth - 60 + "px";
+              top:400px;
+              height: 220px;
+              width: 60px;
+              background-color: pink;
+            }
+
+            #Gameover{
+              font-family: Impact;
+              font-size: 200px;
+              text-align: center;
+            }
+
+        </style>
+    </head>
+    <body onkeydown="Fly()">
+    <div id="circle"></div>
+    <div id ="rectangle"></div>
+    <p id="Score">Press any key to make Pinky Lamb move upwards</p>
+    <p id="Lives"></p>
+
+    <img  id="pinky_lamb" src="https://lh3.googleusercontent.com/cCx22KgA60sgDmxnjmDj2a5qcl14q6Ayf3IlvPgEnOeed7GX7rIp2RdOnzOi352fAbqGoqp5u-3TOU0uH5GZnAQHvluXGZnAesa0d5BQqhf-AGZ8X5G1M2qPmoG2mmmKmUOMdxEqcQD_G1Z19tMfPyQHQlJ9yS8GXj_Xdqf9G1y0IYYdsGc2och4yXn7vH516Rx8gf3SeRj58S0pBLXqq7A1KL3kNY7Tty1hS6rVjuIy7Fv2a7Nnd_HvxXNzmu0n7p5TWBNOA9cC98UgNuAswhazTF2Aa3_rUAKZEEI5W-zIopFRL8l3BAhfGb7AHuqb-txVg9bGSt8ANT5WR1uB3Vm3Z8bBS2nQswX3UeC3-j_Hld_TdUbXanZ-LjBj7UUzGs0sZ2s-W13yXQtk3emLhMliXHPuJENb0DDdkSe09pjBkxYz0jTBSyaiZfujadtmzFjy1AoMtDhEtK9V3VPRS3hTBJ3Sod74yD2XdFKUW-CnAIIstveDTKClHVDGUucukqYu3_QFLcWb9cCbJJrSnFpXcyX3_aqhIP6F7TURvL5zM7PgfXy9pcu7_7inwua6Ccsjk-tvns2WyE5etz3J6Kf6TcK3nRBb3d2muc6NCfLijkpI4_x28W1ktFi9LrthfOQBvTkZmsF9nIlCt8OrWQXO56nC39gWm5s-fzEq4AuZCvqqkrEz8hQKp9WopKdF-3lvrCoVMctMLYCsjSIpo2LI=w555-h625-no" alt="Pinky Lamb" height="200">
+
+    <p id="Gameover"></p>
+    
+  <script>
+  var c = document.getElementById("pinky_lamb");
+  var b = document.getElementById("rectangle");
+  var s = document.getElementById("Score");
+  var h = document.getElementById("Lives");
+  var g = document.getElementById("Gameover");
+  var X_step = 2;
+  var Y_step = 2;
+  var y = 0
+  var b_x = 900;
+  var tp = Math.floor(1 + Math.random()*5)*100;
+  var health = 3;
+  var score = 0;
+
+  var Fly = function(){
+    y -= 100;
+    c.style.top = y + "px";
+  }
+  
+  var move = function() {
+      //Moves Rectangle
+      if(b_x<=0){
+          b_x = window.innerWidth - 50;
+          tp = Math.floor(200 + Math.random()*400);
+          b.style.top = tp  + "px";
+          b.style.height = window.innerHeight - tp + "px";
+          score++;
+          s.textContent = "Score: " + score;
+          h.textContent = "Lives: " + health;
+      }else{
+          b_x = b_x - X_step;
+      }
+      //Gravity
+      if(y<=(window.innerHeight-c.height) ){
+        y = y + Y_step;
+      }
+      
+      //Substract lives
+      if(b_x==270 && (y+c.height) >= tp){
+        h.textContent = "Lives: " + health;
+        health--;
+      }
+
+      c.style.top = y + "px";
+      b.style.left = b_x + "px";
+
+      if(health<=0){
+        g.textContent = "GAMEOVER"
+        clearInterval(timer);
+      }
+    };
+
+    var timer = setInterval(move, 10);
+
+  </script>
+
+    </body>
+</html>
