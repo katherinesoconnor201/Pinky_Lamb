@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<style>
+  canvas{
+      display: block;
+      margin: 0 auto;
+  }
+</style>  
+<canvas id="canvas" width="700" height="600" ></canvas>
+<script>
+  const cvs = document.getElementById("canvas");
+  const ctx = cvs.getContext("2d");
+
+  const box = 50;
+  const rx_max = Math.floor(cvs.width / box)-1;
+  const ry_max = Math.floor(cvs.height / box)-3;
+
+  const p = new Image();
+  p.src = "images/Pinky_Lamb.png";
+  p.width = "50";
+  p.height = "50";
+
+  const f = new Image();
+  f.src = "images/Pinky_Cookie.png";
+  f.width = "50";
+  f.height = "50";
+
+  let snake = [];
+  snake[0] = {
+    x : 9 * box,
+    y : 10 * box
+  }
+
+  let food = {
+    x : Math.floor(Math.random()*rx_max+1) * box,
+    y : Math.floor(Math.random()*ry_max+2) * box
+  }
+
+  let score = 0;
+
+  let d;
+  document.addEventListener("keydown", direction);
+  
+  function direction(event){
+    let k = event.keyCode;
+    if(k == 37 && d != "RIGHT"){
+      d = "LEFT";
+      console.log("LEFT")
+    }else if( k == 38 && d != "DOWN"){
+      d = "UP";
+    }else if( k  == 39 && d != "LEFT"){
+      d = "RIGHT";
+    }else if( k  == 40 && d != "UP"){
+      d = "DOWN";
+    }
+  }
+
+  function collision(head, array){
+    for(var i = 0; i<array.length; i++){
+      if(head.x == array[i].x && head.y == array[i].y){
+        return true;
+      }
+    }
+  }
+
+  function draw(){
+    //Background
+    ctx.fillStyle = "yellow";
+    ctx.fillRect(0, 0, cvs.width, 2*box);
+    ctx.fillStyle = "coral";
+    ctx.fillRect(0, 2*box, cvs.width, cvs.height - 2 * box);
+    ctx.fillStyle = "yellow";
+    ctx.strokeRect(0,0,cvs.width,cvs.height);
+
+    //Snake
+    for(let i = 0; i < snake.length; i++){
+      ctx.drawImage(p, snake[i].x, snake[i].y, p.width, p.height);
+      /*ctx.fillStyle = "pink";
+      ctx.fillRect(snake[i].x, snake[i].y, box, box);
+      ctx.strokeStyle = "red";
+      ctx.strokeRect(snake[i].x, snake[i].y, box, box);*/
+    }
+
+    ctx.drawImage(f,food.x,food.y, f.width, f.height);
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    //Adds head if you have eaten food
+    if( snakeX == food.x && snakeY==food.y){
+      score++;
+      food = {
+        x : Math.floor(Math.random()*rx_max+1) * box,
+        y : Math.floor(Math.random()*ry_max+2) * box
+      }
+    }else{
+      snake.pop();
+    }
+  
+    //Changes Direction
+    if ( d == "LEFT" ) snakeX -= box;
+    if ( d == "RIGHT" ) snakeX += box;
+    if ( d == "UP" ) snakeY -= box;
+    if ( d == "DOWN" ) snakeY +=box;
+    console.log(snakeX);
+    let newHead = {
+      x : snakeX,
+      y : snakeY
+    }
+
+    //GAMEOVER
+    if (snakeX < 0 || snakeX >= cvs.width || snakeY < 2 * box || snakeY >= cvs.height || collision(newHead, snake)){
+      clearInterval(game);
+    }
+
+    snake.unshift(newHead);
+
+    ctx.drawImage(f, food.x, food.y, f.width, f.height);
+    ctx.fillText(score, 2*box, 1.6*box);
+  };
+
+  let game = setInterval(draw, 100);
+</script>
+</html>
