@@ -38,6 +38,7 @@
 
   let score = 0;
 
+  //User Controls
   let d;
   document.addEventListener("keydown", direction);
   
@@ -55,6 +56,7 @@
     }
   }
 
+  //Check to end game
   function collision(head, array){
     for(var i = 0; i<array.length; i++){
       if(head.x == array[i].x && head.y == array[i].y){
@@ -63,14 +65,27 @@
     }
   }
 
+
   function draw(){
     //Background
     ctx.fillStyle = "yellow";
     ctx.fillRect(0, 0, cvs.width, 2*box);
+    ctx.strokeStyle = "pink";
+    ctx.lineWidth = 6;
+    ctx.strokeRect(0 , 0, cvs.width, 2*box);
     ctx.fillStyle = "coral";
     ctx.fillRect(0, 2*box, cvs.width, cvs.height - 2 * box);
     ctx.fillStyle = "yellow";
     ctx.strokeRect(0,0,cvs.width,cvs.height);
+
+    //Lines
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
+    for( var r = 0; r <= rx_max; r++){
+      for ( var c= 0; c <= ry_max; c++){
+        ctx.strokeRect(r*box, (2+c)*box, box, box);
+      }
+    }
 
     //Snake
     for(let i = 0; i < snake.length; i++){
@@ -116,7 +131,9 @@
     snake.unshift(newHead);
 
     ctx.drawImage(f, food.x, food.y, f.width, f.height);
-    ctx.fillText(score, 2*box, 1.6*box);
+    ctx.fillStyle = "coral";
+    ctx.font = "bold 45px Courier"
+    ctx.fillText("Score: " + score, box, 1.2*box);
   };
 
   let game = setInterval(draw, 100);
