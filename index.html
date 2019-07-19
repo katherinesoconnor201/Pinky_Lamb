@@ -1,308 +1,83 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pinky Lambs's Recipe Book</title>
+        <title>Pinky Lamb</title>
         <meta charset="utf-8">
         <style>
             h1{
                 font-family: Impact;
+                font-size: 50px;
                 background-color:rgb(255,243,243);
                 border-color: white;
                 border-style: dotted;
                 border-width: 3px;
                 position: sticky;
+                z-index: 1;
                 top:0;
             }
             h2{
-                border-color: white;
-                border-style: double;
+                border-color: black;
+                background-color: rgb(255, 204, 204);
+                text-align: center;
+                border-style: solid;
                 border-width: 3px;
-                width: 15%;
-                background-color:rgb(255,243,243);
+                width: 30%;
             }
+
+            h2:hover{
+                background-color: aquamarine; 
+            }
+            
+            a:link {
+              text-decoration: none;
+            }
+
+            a:visited {
+              text-decoration: none;
+            }
+
+            a:hover {
+              text-decoration: underline;
+            }
+
+            a:active {
+              text-decoration: underline;
+            }
+
             body{
+                background-image: url("images/graph-paper(1).png");
                 background-color:rgb(252, 229, 232);
                 font-family: Courier;
             }
-            table{
-                text-align: center;
-            }
-            #contents{
-                background-color: rgb(255, 255, 204);
-                color: rgb(255, 0, 102);
-                border-color: white;
-                border-style: double;
-                border-width: 3px;
-                padding: 5px;
+
+            .Game_Img{
+                position: relative;
                 width: 30%;
+                left: 0;
+                top: 500;
+                border-color: black;
+                border-style: solid;
+                border-width: 3px;
             }
 
         </style>
     </head>
     <body>
-       
-        <h1>Pinky Lambs's Recipe Book</h1>
+
+
+        <h1>Planet Pinky Lamb</h1>
+
         <img src="https://lh3.googleusercontent.com/cCx22KgA60sgDmxnjmDj2a5qcl14q6Ayf3IlvPgEnOeed7GX7rIp2RdOnzOi352fAbqGoqp5u-3TOU0uH5GZnAQHvluXGZnAesa0d5BQqhf-AGZ8X5G1M2qPmoG2mmmKmUOMdxEqcQD_G1Z19tMfPyQHQlJ9yS8GXj_Xdqf9G1y0IYYdsGc2och4yXn7vH516Rx8gf3SeRj58S0pBLXqq7A1KL3kNY7Tty1hS6rVjuIy7Fv2a7Nnd_HvxXNzmu0n7p5TWBNOA9cC98UgNuAswhazTF2Aa3_rUAKZEEI5W-zIopFRL8l3BAhfGb7AHuqb-txVg9bGSt8ANT5WR1uB3Vm3Z8bBS2nQswX3UeC3-j_Hld_TdUbXanZ-LjBj7UUzGs0sZ2s-W13yXQtk3emLhMliXHPuJENb0DDdkSe09pjBkxYz0jTBSyaiZfujadtmzFjy1AoMtDhEtK9V3VPRS3hTBJ3Sod74yD2XdFKUW-CnAIIstveDTKClHVDGUucukqYu3_QFLcWb9cCbJJrSnFpXcyX3_aqhIP6F7TURvL5zM7PgfXy9pcu7_7inwua6Ccsjk-tvns2WyE5etz3J6Kf6TcK3nRBb3d2muc6NCfLijkpI4_x28W1ktFi9LrthfOQBvTkZmsF9nIlCt8OrWQXO56nC39gWm5s-fzEq4AuZCvqqkrEz8hQKp9WopKdF-3lvrCoVMctMLYCsjSIpo2LI=w555-h625-no" alt="Pinky Lamb" height="300">
-        <div id = "contents">
-            <h3>Contents:</h3>
-            
-            <ol>
-                <li><a href="#One">Pinky Cookies</a></li>
-                <li><a href="#Two">Pinky Cupcakes</a></li>
-                <li><a href="#Three">Pinky Cake</a></li>
-                <li><a href="#Four">Pinky Lambonade</a></li>
-                <li><a href="#Five">Anything You Want</a></li>
-            </ol>
-        </div>
-        
-        <h2 id="One"><center>Pinky Cookies</center></center></h2>
-        <img src="https://lh3.googleusercontent.com/rOdgzH0fetgRItkBrK5CmMuOXwmzqCtGFlG7n5FLt-UduwB5pYNZq5CA0ILg4XCrLQqLGaTnyKkRWmM94ODG_mVRl1dsKpJMqk6npxwjYVzHDWXj4kPZAA3g55VXqcgWLrf0ICA6m71ZdVHyH6urjrC22_ebzT_Msjt9qSp0AyvsKZ_J5-cj6OxaYwXtl0JrAu1JIO4GdhwVK5TAgWd2GJcYS5xU2bUUc_Jtm3MQT-f5JaDQ1M4FvREbTQfPPkpiDvbi9tFWcsx2oTgOo2zZnodmMgMutWsOGeT1B970aGXwvezXwncuZ7lFXBbmZJluh5q1fWujUGx0Aa1IOu4oU8Vn4BKTUyBnTr70UaSguccDwoqj4NnKvWm-4umOpSJw1sZEazVscZKApB47KejeF88eSSGGNy2n7WFrbNCkt8T96oZGyCnZw4cxGUV1A-HP3aGmoYWdvZr2r89aTZ_3wsNmME760bcJua7cK6Iolp_pmcsMpE51UkRKaLjS5ROiZKZQVykcIGFoGzJtLe6uiRd-kZdKQzBr-YiFNzNc32k2r6FE4yFRzApBWJYTV0O7wT6WGxD-uRvBiIbWICSnrfnUssU7-1LbFeu63SP-UY2qnM3k1dR3zrgtUpY_-Lw_Cp6GK-dWN1jOWzi5RloaMxrh1vd_UPHNM00nBxupZmi_q_djCpyGmVwYZVGVu8tR4iqrDpjOlI75ut_g5NXRPNqB=w708-h625-no" alt="pink cookies" width="150">
-        <ul>
-            <li>Time: 42 min </li>
-            <li>Serves: 32 regular people (About 1 Pinky Lamb) </li>
-        </ul>
-        
-        <table border="1" border="1">
-            <thead>
-                <tr>
-                    <th>Ingredients</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><center>Buttter</center></td>
-                    <td><center>1/2 Cup</center></td>
-                </tr>
-                <tr>
-                    <td><center>Powdered Sugar</center></td>
-                    <td><center>1/2 Cup</center></td>
-                </tr>
-                <tr>
-                    <td><center>Betty Crocker™ sugar cookie mix   </center></td>
-                    <td><center>1 Pouch</center></td>
-                </tr>
-                <tr>
-                    <td><center>Egg Whites</center></td>
-                    <td><center>2</center></td>
-                </tr>
-                <tr>
-                    <td><center>Chocolate Chips </center></td>
-                    <td><center>1 Cup</center></td>
-                </tr>
 
-            </tbody>
-        </table>
-    <h3>Directions</h3>   
-    <ol>
-        <li>Preheat oven to 375°F.</li>
-        <li>Cream butter and cookie mix. Add powdered sugar and flour and mix until well blended and crumbs are fine. Add egg whites and mix until well blended and mixture sticks together. Add red food coloring, several drops at a time, mixing after each addition until desired pink color is achieved and is uniform throughout the dough. Stir in chocolate pieces.</li>
-        <li>With a 1-1/4 inch cookie scoop (or by rounded spoonful), drop cookies onto ungreased cookie sheet. Bake for 10 minutes, or until set but not brown. Allow to cool on cookie sheet for 2 minutes before removing cookies to cooling rack to cool completely.</li>
-    </ol>
-        
-    <p><em>Source: <a href="https://www.tablespoon.com/recipes/pink-chocolate-chip-cookies/1f63354a-49e8-4686-808c-8785883ffc89">www.tablespoon.com</a></em></p>
-    
-        <h2 id="Two"><center>Pinky Cupcakes</center></h2>
-        <img src="https://lh3.googleusercontent.com/EIEfey93MvrPgQi-7sHYBtNwNw-R2_IhIdha9ZPnICocKz8mf8hcJR-dtRkF1gCl51-wchwofejhRk6ZL9EnYyyTnnU7TYsZ-JHLlYBz3x63KidDeKacbaNKHrw1wOMf1I9lK6g2R8bZQDCHDjJ9BJ93FHHgs0yGcSrX3J9ijd8ZWFSLZb4mJpBkqZWRX0LbqxgeuishCXmNIR_hJCH7_-aDR2S-6ZqGRV8Ko6ygR11zVt8hGpI2q7PLlXLMWUbZjkme9HIBA-BDBXJJwIK2X1-B6Nj_Ceb7QPnlVBgHxJsZygugIyficMy8vUvvF8h9y92le6t_qwwNmKFEp14HoGY5HZTWPMQMA6SUDU29HQ4E8f9KYIkOZbabFfO4Uji9OTUUOHiDwGk7XcWbRDyy8PymXaWmwoJ2axWhC-At41Ds-SGOhAQW_QZ_0LlPjcxz2D0qNa3fwQnSaDKE8BrwhXgF42Eg6kFXu1ZepuKxs3a4dn2M23dDrKiPGa8puNnEVMbEMMpWwoVtk5gqz711V74gIzrSdlPrzPS-xRybd7xuyfXckbaBjnhysTxMxcRKlrb90CnvQJG0AEkjpZgLBp42B33lfRyfk55Oev4QWIwBU3Cj7RZ1cCVHZlsHmcFhJnxVP6CR7C0PYcMPQiwXwwxUhlKSR3kAJWJWboVZqX9C-EVMqK3AnppoUckxGe2BuueFchMvetr9UQBdj1X6XKVI=w611-h625-no" alt="pink cupcakes" width="150">
-        <ul>
-            <li>Time: 50 min</li>
-            <li>Serves: 24 regular people (About 1 Pinky Lamb)</li>
-        </ul>
-        
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Ingredients</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><center>Buttter</center></td>
-                    <td><center>1 Cup</center></td>
-                </tr>
-                <tr>
-                    <td><center>Sugar</center></td>
-                    <td><center>1 & 1/4 Cup</center></td>
-                </tr>
-                <tr>
-                    <td><center>Pink Food Coloring</center></td>
-                    <td><center>1/8 teaspoon</center></td>
-                </tr>
-                <tr>
-                    <td><center>Eggs</center></td>
-                    <td><center>3</center></td>
-                </tr>
-                <tr>
-                    <td><center>Vanilla Extract</center></td>
-                    <td><center>1 teaspoon</center></td>
-                </tr>
-                <tr>
-                    <td><center>All-purpose flour </center></td> 
-                    <td><center>2-1/2 </center></td>
-                </tr>
-                <tr> 
-                    <td><center>Baking Powder                     </center></td> 
-                    <td><center>1-1/2 teaspoons</center></td>
-                </tr>
-                <tr> 
-                    <td><center>Baking Soda </center></td> 
-                    <td><center> 1/4 teaspoon </center></td>
-                </tr>
-                                <tr>
-                    <td><center>Salt</center></td>
-                    <td><center>1/4 teaspoon</center></td>
-                </tr>
-                                <tr>
-                    <td><center>Buttermilk</center></td>
-                    <td><center>1 Cup</center></td>
-                </tr>
-            </tbody>
-        </table>
-        <h3>Directions</h3>   
-        <ol>
-        <li>In a large bowl, cream the butter, sugar and food coloring until light and fluffy. Add eggs, 1 at a time, beating well after each addition. Beat in vanilla. Combine the flour, baking powder, baking soda and salt; add to creamed mixture alternately with buttermilk, beating well after each addition.</li>
-        <li>Fill 24 paper-lined muffin cups two-thirds full. Bake at 350° for 23-27 minutes or until a toothpick inserted in the center comes out clean. Cool for 10 minutes before removing from pans to wire racks to cool completely.</li>
-        <li>Meanwhile, place white chips in a small bowl. In a small saucepan, bring cream just to a boil. Pour over chips; whisk until smooth. Stir in butter. Transfer to a large bowl. Chill for 30 minutes, stirring once.</li>
-        <li>Beat on high speed for 2-3 minutes or until soft peaks form and frosting is light and fluffy. Frost cupcakes. Roll edges of cupcakes with coarse sugar; decorate with sugar pearls. Store in the refrigerator.</li>
-    </ol>
-        
-<p><em>Source: <a href="https://www.tasteofhome.com/recipes/pink-velvet-cupcakes/">Tate of Home</a></em></p>
-    
-        <h2 id="Three"><center>Pinky Cake</center></h2>
-        <img src="https://lh3.googleusercontent.com/wlLvN0rsC9nqCvGP9Y42TvnKrnM9HQU-70bI77Dl69MrzeE5fA_mUWKFFhGTch46W3VcT4nTNo4amKDtGpiCe72q4rsWlidFk0v4OcF4dPKj_rY76Yp_t5VcFRLvpZlt0PcQjaDnPm4AVMaJxIxQaTnJOJxRuO4c0TMh4hgMs_yjoSe6zgCEZEd1nay3tv6ZYspstIaUf9WGRhbTY-wXW3sEXsiwNZ4GrpanTeBj1VBlAhZ9bRMoKXRzCK7f--oA_R4VEfHjYkS7ZxK4l82z8Z_KX3jkS67Pwc9VkFUSHX7cl3CVRiFgV199pQfgroEw596-2WZ1tHr8ukBF3dM42GLNY4ltQ6NmOZtz1Sg0hapqfFi5Kgcrg39BASvhwNcRQB19Os_MYh25-ot7rwkY6Yf7X8SdL4mAo-4lMb-fNjH1Z4TkAfoMfs11m3f8MDeD-Jtfnii9qP1z1zknA4ZHi8NoGiKuNUqCRffxyZsPHuYYlFjQbbW6w6rG4iGLUAmIHFqd6qX5CAnMDi-tBnBCdPG_hFXt2-7YPjA8T6iMYn8WknIzTpA67DUPiLksCz2-YZAQOlizJ0INrkayYjfskMMCbD_feSod_gE9X6z0BRLOYe8wh5fAWgEoKB3UcmChy061HyLxXisU-nd6BkUKBOsUiVLY-xw5p8Z1Lia-KI5DaAMxVUpLYkdDxZ_rv5OeUJNmJ20d28lPavGA357EMeFK=w1043-h625-no" alt="pink cake" width="150">
-              <ul>
-            <li>Time: 50 min</li>
-            <li>Serves: 24 regular people (About 1 Pinky Lamb)</li>
-        </ul>
-        
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Ingredients</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><center>Buttter</center></td>
-                    <td><center>1 Cup</center></td>
-                </tr>
-                <tr>
-                    <td><center>Sugar</center></td>
-                    <td><center>1 & 1/4 Cup</center></td>
-                </tr>
-                <tr>
-                    <td><center>Pink Food Coloring</center></td>
-                    <td><center>1/8 teaspoon</center></td>
-                </tr>
-                <tr>
-                    <td><center>Eggs</center></td>
-                    <td><center>3</center></td>
-                </tr>
-                <tr>
-                    <td><center>Vanilla Extract</center></td>
-                    <td><center>1 teaspoon</center></td>
-                </tr>
-                <tr>
-                    <td><center>All-purpose flour </center></td> 
-                    <td><center>2-1/2 </center></td>
-                </tr>
-                <tr> 
-                    <td><center>Baking Powder                     </center></td> 
-                    <td><center>1-1/2 teaspoons</center></td>
-                </tr>
-                <tr> 
-                    <td><center>Baking Soda </center></td> 
-                    <td><center> 1/4 teaspoon </center></td>
-                </tr>
-                                <tr>
-                    <td><center>Salt</center></td>
-                    <td><center>1/4 teaspoon</center></td>
-                </tr>
-                                <tr>
-                    <td><center>Buttermilk</center></td>
-                    <td><center>1 Cup</center></td>
-                </tr>
-            </tbody>
-        </table>
-        <h3>Directions</h3>   
-        <ol>
-        <li>In a large bowl, cream the butter, sugar and food coloring until light and fluffy. Add eggs, 1 at a time, beating well after each addition. Beat in vanilla. Combine the flour, baking powder, baking soda and salt; add to creamed mixture alternately with buttermilk, beating well after each addition.</li>
-        <li>Fill pan. Bake at 350° for 30ish minutes or until a toothpick inserted in the center comes out clean. Cool for 10 minutes before removing from pans to wire racks to cool completely.</li>
-        <li>Meanwhile, place white chips in a small bowl. In a small saucepan, bring cream just to a boil. Pour over chips; whisk until smooth. Stir in butter. Transfer to a large bowl. Chill for 30 minutes, stirring once.</li>
-        <li>Beat on high speed for 2-3 minutes or until soft peaks form and frosting is light and fluffy. Frost cupcakes. Roll edges of cake with coarse sugar; decorate with sugar pearls. Store in the refrigerator.</li>
-    </ol>
-        
-<p><em>Source: <a href="https://www.tasteofhome.com/recipes/pink-velvet-cupcakes/">Taste of Home</a></em></p>
+        <p></p>
+ 
+        <h2><a href="Snake.html"> If you give a pinky lamb a cookie...</a></h2>
+        <a href="Snake.html"><img src ="images/Pink_Snake.png" alt="Snake Game" class="Game_Img"></img></a>
 
-<h2 id="Four"><center> Pinky Lambonade </center></h2>
-<img src="https://i5.walmartimages.com/asr/ee2e7072-ef83-4c6a-ad5e-d1a1618a3efa_2.e886b4cf01abc40ca8904e69f39f7b72.jpeg?odnWidth=undefined&odnHeight=undefined&odnBg=ffffff" alt="strawberry lemonade" width="150">
-<ul>
-            <li>Time: 2 min </li>
-            <li>Serves: 8 regular people (About 1 Really Thirsty Pinky Lamb) </li>
-        </ul>
-        
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Ingredients</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><center>Crystal Light Sugar Free Strawberry Lemonade Liquid Drink Mix</center></td>
-                    <td><center>1 Pouch</center></td>
-                </tr>
-                <tr>
-            </tbody>
-        </table>
+        <h2><a href="Fly_PinkyLamb.html"> Click Here to See Pinky Lamb Fly!</a></h2>
+        <a href="Fly_PinkyLamb.html"> <img src="images/Fly_PinkyLamb.png" alt="Fly_PinkyLamb" class="Game_Img"></img></a>
 
-    <h3>Directions</h3>   
-    <ol>
-        <li>Follow the directions on the back of the package.</li>
-        <li>Enjoy!</li>
-    </ol>
-        
-    <p><em>Source: <a href="https://www.walmart.com/ip/Crystal-Light-Sugar-Free-Strawberry-Lemonade-Liquid-Drink-Mix-Caffeine-Free-1-62-fl-oz-Bottle/35221608">www.walmart.com</a></em></p>
+        <h2><a href="Bouncing_Pinky_Lamb.html"> Daboo Daboo...</a></h2>
 
-    <h2 id="Five"><center> Anything You Wany </center></h2>
-<img src="" width="150">
-<ul>
-            <li>Time: As long as you want</li>
-            <li>Serves: As many people or Pinky Lambs as you want </li>
-        </ul>
-        
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Ingredients</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><center>Whatever you want</center></td>
-                    <td><center>However much you want</center></td>
-                </tr>
-                <tr>
-                    <td>Pink Food Coloring</td>
-                    <td>Several drops</td>
-            </tbody>
-        </table>
-
-    <h3>Directions</h3>   
-    <ol>
-        <li>Add pink food coloring.</li>
-        <li>Enjoy!</li>
-    </ol>
-    <p><em>Source</em><a href="https://www.amazon.com/LorAnn-Pink-Liquid-Color-Ounce/dp/B0008DIB1O"> www.amazon.com</a>
-    </p>
-    <p><a href="Snake.html"> If you give a pinky lamb a cookie...</a></p>
-
-    <p><a href="Fly_PinkyLamb.html"> Click Here to See Pinky Lamb Fly!</a></p>
-
-    <p><a href="Bouncing_Pinky_Lamb.html"> Daboo Daboo...</a></p>
     </body>
 </html>
