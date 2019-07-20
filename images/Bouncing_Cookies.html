@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<style>
+  body{
+      background-color:rgb(252, 229, 232);
+  }
+
+  canvas{
+      display: block;
+      margin: 0 auto;
+
+  }
+  #intro{
+    position: absolute;
+    left: 400px;
+    top: 100px;
+    width: 500px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: solid;
+    border-width: 2px;
+    background-color: aquamarine; 
+    box-shadow: 10px 10px grey;
+}
+</style> 
+<body> 
+  <p id="intro"> Use the arrow keys or the touchscreen in order to move Pinky Lamb. Try to eat the cookies and avoid the flowers.</p>
+<canvas id="canvas" width="700" height="500"></canvas>
+<script>
+  const cvs = document.getElementById("canvas");
+  const ctx = cvs.getContext("2d");
+
+  const intro = document.getElementById("intro");
+  const box = 50;
+  const rx_max = Math.floor(cvs.width / box)-1;
+  const ry_max = Math.floor(cvs.height / box)-3;
+
+  const p = new Image();
+  p.src = "images/Pinky_Lamb.png";
+  p.width = "60";
+  p.height = "70";
+
+  const f = new Image();
+  f.src = "images/Pinky_Cookie.png";
+  f.width = "40";
+  f.height = "40";
+
+  const b = new Image();
+  b.src = "images/Flower.PNG";
+  b.width = "40";
+  b.height = "40";
+
+  let player = {
+    x : cvs.width / 2,
+    y : cvs.height / 2,
+    width : p.width - 10,
+    height : p.height - 10,
+    health : 3
+  }
+
+  let food = [];
+  food [0] = {
+    x : 0,
+    y : cvs.height / 2 - f.height,
+    X_step : Math.floor(Math.random()*5 + 3),
+    Y_step : Math.floor(Math.random()*10 - 5),
+    good : Math.floor(Math.random()*5),
+    width : f.width,
+    height : f.height
+
+  }
+
+  let score = 0;
+
+  document.addEventListener("touchmove", clearIntro);
+  document.addEventListener("keydown", clearIntro);
+
+  function clearIntro(){
+    intro.textContent = "";
+    intro.style.borderStyle = "none";
+    intro.style.boxShadow = "none";
+  }
+
+  //User Controls
+  let d = [];
+  document.addEventListener("touchmove", t_move);
+  document.addEventListener("keydown", k_down);
+  document.addEventListener("keyup", k_up);
+
+  function t_move(event){
+    console.log(event.touches[0].screenX);
+    player.x = event.touches[0].screenX - cvs.offsetLeft - 100;
+    player.y = event.touches[0].screenY - 200;
+  }
+
+  function k_down(event){
+    let k = event.keyCode;
+    if(k == 37) d[0] = true;
+    if( k == 38) d[1] = true;
+    if( k  == 39) d[2] = true;
+    if( k  == 40) d[3] = true;
+  }
+
+  function k_up(event){
+    let k = event.keyCode;
+    if(k == 37) d[0] = false;
+    if( k == 38) d[1] = false;
+    if( k  == 39) d[2] = false;
+    if( k  == 40) d[3] = false;
+  }
+
+  function collision(rect1, rect2){
+  if (rect1.x < rect2.x + rect2.width &&
+     rect1.x + rect1.width > rect2.x &&
+     rect1.y < rect2.y + rect2.height &&
+     rect1.y + rect1.height > rect2.y) {
+      // collision detected!
+          return true;
+      }else{
+        return false;
+      }
+  }
+
+  let t = 0;
+
+  function draw(){
+    //Background
+    ctx.fillStyle = "#e1aaff";
+    ctx.fillRect(0, 0, cvs.width, 2*box);
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 6;
+    ctx.strokeRect(0 , 0, cvs.width, 2*box);
+    ctx.fillStyle = "#c1ffaa";
+    ctx.fillRect(0, 2*box, cvs.width, cvs.height - 2 * box);
+    ctx.strokeRect(0, 2*box, cvs.width, cvs.height - 2 * box);
+
+    //Pinky Lamb
+    ctx.drawImage(p, player.x, player.y, p.width, p.height);
+    //Lines
+    //console.log("(" + player.x + ", " + player.y + "), ( " + food[0].x + ", " + food[0].y + ")");
+    //console.log(collision(player, food[0]));
+    //food
+    for(let i = 0; i < food.length; i++){
+      if(food[i].good == 0){
+      ctx.drawImage(b, food[i].x, food[i].y, b.width, b.height);
+    }else{
+      ctx.drawImage(f, food[i].x, food[i].y, f.width, f.height);
+    }
+    //moves food
+      food[i].x += food[i].X_step;
+      food[i].y += food[i].Y_step;
+
+      if(food[i].x>=(cvs.width-food[i].width) || food[i].x<=0){
+          food[i].X_step = -1*food[i].X_step;
+      }
+      if(food[i].y>=(cvs.height-food[i].height) || food[i].y<=100){
+          food[i].Y_step = -1*food[i].Y_step;
+      }
+
+    //Checks if you have eaten food
+    if( collision(player, food[i])){
+      if(food[i].good == 0){
+        player.health--;
+        if(player.health == 0){
+          ctx.fillStyle = "white";
+          ctx.font = "bold 100px Courier"
+          ctx.fillText("GAMEOVER" , 100, cvs.height / 2);
+          ctx.strokeStyle = "black"
+          ctx.strokeText("GAMEOVER" , 100, cvs.height / 2);
+          clearInterval(game);
+        }
+      }
+      score++;
+      food.splice(i,1);
+    }
+      /*ctx.fillStyle = "pink";
+      ctx.fillRect(food[i].x, food[i].y, box, box);
+      ctx.strokeStyle = "red";
+      ctx.strokeRect(food[i].x, food[i].y, box, box);*/
+    }
+
+    //Pinky Lab Moves
+    var step = 10;
+    //Changes Direction
+    if ( d[0] ) player.x -= step;
+    if ( d[1] ) player.y -= step;
+    if ( d[2] ) player.x += step;
+    if ( d[3] ) player.y += step;
+
+    if(player.y<=100){
+      player.y = 101;
+    }else if(player.y + player.height >= cvs.height){
+       player.y = cvs.height - player.height - 1;
+    }else if(player.x <= 0){
+      player.x = 1;
+    }else if( player.x + player.width >= cvs.width ){
+      player.x = cvs.width - player.width - 1;
+    }
+
+    t++;
+    if(t==100){
+      t = 0;
+      var newFood = {
+        x : 0,
+        y : cvs.height / 2 - f.height,
+        X_step : Math.floor(Math.random()*5 + 3),
+        Y_step : Math.floor(Math.random()*10 - 5),
+        width : f.width,
+        height : f.height,
+        good : Math.floor(Math.random()*5),
+
+      }
+      food.push(newFood);
+    }
+
+    //GAMEOVER
+   /* if (foodX < 0 || foodX >= cvs.width || foodY < 2 * box || foodY >= cvs.height || collision(newHead, food)){
+      clearInterval(game);
+    }*/
+
+    ctx.fillStyle = "white";
+    ctx.font = "bold 45px Courier"
+    ctx.fillText("Score: " + score, box, 1.2*box);
+    ctx.fillText("Lives: " + player.health, box * 7, 1.2*box);
+  };
+
+  //window.requestAnimationFrame(draw);
+  let game = setInterval(draw, 20);
+</script>
+</body>
+</html>
