@@ -10,13 +10,28 @@
       margin: 0 auto;
 
   }
+  #intro{
+    position: absolute;
+    left: 400px;
+    top: 100px;
+    width: 500px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: solid;
+    border-width: 2px;
+    background-color: aquamarine; 
+    box-shadow: 10px 10px grey;
+}
 </style> 
 <body> 
+  <p id="intro"> Use the arrow keys or the touchscreen in order to move Pinky Lamb. Try to eat the cookies and avoid the flowers.</p>
 <canvas id="canvas" width="700" height="500"></canvas>
 <script>
   const cvs = document.getElementById("canvas");
   const ctx = cvs.getContext("2d");
 
+  const intro = document.getElementById("intro");
   const box = 50;
   const rx_max = Math.floor(cvs.width / box)-1;
   const ry_max = Math.floor(cvs.height / box)-3;
@@ -32,15 +47,15 @@
   f.height = "40";
 
   const b = new Image();
-  b.src = "images/Pink_Cupcake.png";
+  b.src = "images/Flower.png";
   b.width = "40";
   b.height = "40";
 
   let player = {
     x : cvs.width / 2,
     y : cvs.height / 2,
-    width : p.width,
-    height : p.height,
+    width : p.width - 10,
+    height : p.height - 10,
     health : 3
   }
 
@@ -58,10 +73,26 @@
 
   let score = 0;
 
+  document.addEventListener("touchmove", clearIntro);
+  document.addEventListener("keydown", clearIntro);
+
+  function clearIntro(){
+    intro.textContent = "";
+    intro.style.borderStyle = "none";
+    intro.style.boxShadow = "none";
+  }
+
   //User Controls
   let d = [];
+  document.addEventListener("touchmove", t_move);
   document.addEventListener("keydown", k_down);
   document.addEventListener("keyup", k_up);
+
+  function t_move(event){
+    console.log(event.touches[0].screenX);
+    player.x = event.touches[0].screenX - cvs.offsetLeft - 100;
+    player.y = event.touches[0].screenY - 200;
+  }
 
   function k_down(event){
     let k = event.keyCode;

@@ -4,19 +4,7 @@
         <title>Pinky Lamb</title>
         <meta charset="utf-8">
         <style>
-            h1{
-                font-family: Impact;
-                font-size: 50px;
-                background-color:rgb(255,243,243);
-                border-color: black;
-                border-style: solid;
-                border-width: 3px;
-                text-align: center;
-                position: sticky;
-                z-index: 1;
-                box-shadow: 10px 10px grey;
-                top:0;
-            }
+
             h2{
                 border-color: black;
                 background-color: rgb(255, 204, 204);
@@ -78,23 +66,99 @@
 
             }
 
+            .navbar {
+              background-color: rgb(252, 222, 222);
+              border-color: black;
+              border-style: solid;
+              border-width: 3px;
+              z-index: 1;
+              position: sticky;
+              margin-left: auto;
+              margin-right: auto;
+              box-shadow: 10px 10px grey;
+              top: 0;
+              width: 50%;
+            }
+
+            #head{
+              font-family: Impact;
+              font-size: 40px;
+              text-align: center;
+            }
+
+            .dropdown {
+              font-size: 16px;  
+              border: none;
+              outline: none;
+              color: black;
+              margin-left: auto;
+              margin-right: auto;
+              padding: 14px 16px;
+              background-color: inherit;
+              font-family: inherit;
+              margin: 0;
+              z-index: 1;
+            }
+
+            .dropdown-content {
+              display: none;
+              position: absolute;
+              margin-left: auto;
+              margin-right: auto;
+              background-color: rgb(252, 230, 239);
+              min-width: 160px;
+              z-index: 1;
+            }
+
+            .dropdown-content a {
+              float: none;
+              color: black;
+              padding: 12px 16px;
+              text-decoration: none;
+              display: block;
+              text-align: left;
+              margin-left: auto;
+              margin-right: auto;
+            }
+
+            .dropdown-content a:hover {
+              background-color: rgb(214, 195, 203);
+            }
+
+            .dropdown:hover .dropdown-content {
+              display: block;
+            }
+            
+
         </style>
     </head>
     <body>
 
 
-        <h1>Planet Pinky Lamb</h1>
+        <div class="navbar">
+            <div class= "dropdown">
+                <div id="head">Planet Pinky Lamb</div> 
+                <div class="dropdown-content">
+                    <a href="#One">If you give Pinky Lamb a cookie...</a>
+                    <a href="#Two">Don't Eat the Flowers Pinky Lamb!</a>
+                    <a href="#Three">Click Here to See Pinky Lamb Fly!</a>
+                </div>
+            </div>
+        </div>
 
         <img src="https://lh3.googleusercontent.com/cCx22KgA60sgDmxnjmDj2a5qcl14q6Ayf3IlvPgEnOeed7GX7rIp2RdOnzOi352fAbqGoqp5u-3TOU0uH5GZnAQHvluXGZnAesa0d5BQqhf-AGZ8X5G1M2qPmoG2mmmKmUOMdxEqcQD_G1Z19tMfPyQHQlJ9yS8GXj_Xdqf9G1y0IYYdsGc2och4yXn7vH516Rx8gf3SeRj58S0pBLXqq7A1KL3kNY7Tty1hS6rVjuIy7Fv2a7Nnd_HvxXNzmu0n7p5TWBNOA9cC98UgNuAswhazTF2Aa3_rUAKZEEI5W-zIopFRL8l3BAhfGb7AHuqb-txVg9bGSt8ANT5WR1uB3Vm3Z8bBS2nQswX3UeC3-j_Hld_TdUbXanZ-LjBj7UUzGs0sZ2s-W13yXQtk3emLhMliXHPuJENb0DDdkSe09pjBkxYz0jTBSyaiZfujadtmzFjy1AoMtDhEtK9V3VPRS3hTBJ3Sod74yD2XdFKUW-CnAIIstveDTKClHVDGUucukqYu3_QFLcWb9cCbJJrSnFpXcyX3_aqhIP6F7TURvL5zM7PgfXy9pcu7_7inwua6Ccsjk-tvns2WyE5etz3J6Kf6TcK3nRBb3d2muc6NCfLijkpI4_x28W1ktFi9LrthfOQBvTkZmsF9nIlCt8OrWQXO56nC39gWm5s-fzEq4AuZCvqqkrEz8hQKp9WopKdF-3lvrCoVMctMLYCsjSIpo2LI=w555-h625-no" alt="Pinky Lamb" class="other" height="300">
 
         <p></p>
- 
-        <h2><a href="Snake.html"> If you give a pinky lamb a cookie...</a></h2>
+
+        <h2 id="One"><a href="Snake.html"> If you give a pinky lamb a cookie...</a></h2>
         <a href="Snake.html"><img src ="images/Pink_Snake.png" alt="Snake Game" class="Game_Img"></img></a>
 
-        <h2><a href="Fly_PinkyLamb.html"> Click Here to See Pinky Lamb Fly!</a></h2>
+        <h2 id="Two"><a href="Bouncing_Cookies.html"> Don't Eat the Flowers, Pinky Lamb!</a></h2>
+        <a href="Bouncing_Cookies.html"><img src ="images/Bouncing_Cookies.png" alt="Bouncing_Cookies" class="Game_Img"></img></a>
+
+        <h2 id="Three"><a href="Fly_PinkyLamb.html"> Click Here to See Pinky Lamb Fly!</a></h2>
         <a href="Fly_PinkyLamb.html"> <img src="images/Fly_PinkyLamb.png" alt="Fly_PinkyLamb" class="Game_Img"></img></a>
-        <h2><a href="Bouncing_Cookies.html"> Don't Eat the Flowers, Pinky Lamb!</a></h2>
+
         <h2><a href="Bouncing_Pinky_Lamb.html"> Daboo Daboo...</a></h2>
 
     </body>
