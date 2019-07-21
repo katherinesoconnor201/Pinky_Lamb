@@ -9,26 +9,44 @@
       display: block;
       margin: 0 auto;
   }
+
+  #intro{
+    position: absolute;
+    left: 400px;
+    top: 100px;
+    width: 500px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: solid;
+    border-width: 2px;
+    background-color: aquamarine; 
+    box-shadow: 10px 10px grey;
+  }
 </style> 
 <body> 
 <canvas id="canvas" width="700" height="600" ></canvas>
+  <p id="intro"> Use the arrow keys to move Pinky Lamb. Try to eat the cookies.</p>
 <script>
   const cvs = document.getElementById("canvas");
   const ctx = cvs.getContext("2d");
+  const numb = 12;
+  const box = Math.floor(cvs.height/numb);
+  ctx.canvas.height = numb*box;
+  ctx.canvas.width  = numb*box;
 
-  const box = 50;
   const rx_max = Math.floor(cvs.width / box)-1;
   const ry_max = Math.floor(cvs.height / box)-3;
 
   const p = new Image();
   p.src = "images/Pinky_Lamb.png";
-  p.width = "50";
-  p.height = "50";
+  p.width = box.toString();
+  p.height = box.toString();
 
   const f = new Image();
   f.src = "images/Pinky_Cookie.png";
-  f.width = "50";
-  f.height = "50";
+  f.width = box.toString();
+  f.height = box.toString();
 
   let snake = [];
   snake[0] = {
@@ -42,6 +60,18 @@
   }
 
   let score = 0;
+ 
+  //Sets and clears intro
+  document.addEventListener("keydown", clearIntro);
+
+  intro.style.left = cvs.offsetLeft + box + "px";
+  intro.style.top = cvs.height / 3 + "px";
+
+  function clearIntro(){
+    intro.textContent = "";
+    intro.style.borderStyle = "none";
+    intro.style.boxShadow = "none";
+  }
 
   //User Controls
   let d;
@@ -122,14 +152,16 @@
     if ( d == "RIGHT" ) snakeX += box;
     if ( d == "UP" ) snakeY -= box;
     if ( d == "DOWN" ) snakeY +=box;
-    console.log(snakeX);
+
+    console.log("Snake: " + snakeX + " " + snakeY);
+    console.log("Food: " + food.x + " " + food.y)
     let newHead = {
       x : snakeX,
       y : snakeY
     }
 
     //GAMEOVER
-    if (snakeX < 0 || snakeX >= cvs.width || snakeY < 2 * box || snakeY >= cvs.height || collision(newHead, snake)){
+    if (snakeX < 0 || snakeX >= cvs.width || snakeY < 2*box || snakeY >= cvs.height || collision(newHead, snake)){
       ctx.fillStyle = "white";
       ctx.font = "bold 100px Courier"
       ctx.fillText("GAMEOVER" , 100, cvs.height / 2);

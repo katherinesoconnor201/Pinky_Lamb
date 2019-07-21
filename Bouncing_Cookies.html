@@ -22,14 +22,16 @@
     border-width: 2px;
     background-color: aquamarine; 
     box-shadow: 10px 10px grey;
-}
+  }
 </style> 
 <body> 
   <p id="intro"> Use the arrow keys or the touchscreen in order to move Pinky Lamb. Try to eat the cookies and avoid the flowers.</p>
-<canvas id="canvas" width="700" height="500"></canvas>
+<canvas id="canvas"></canvas>
 <script>
   const cvs = document.getElementById("canvas");
   const ctx = cvs.getContext("2d");
+  ctx.canvas.width  = window.innerWidth  - 100;
+  ctx.canvas.height = window.innerHeight - 10;
 
   const intro = document.getElementById("intro");
   const box = 50;
@@ -51,11 +53,12 @@
   b.width = "40";
   b.height = "40";
 
+  let img_space = 10
   let player = {
     x : cvs.width / 2,
     y : cvs.height / 2,
-    width : p.width - 10,
-    height : p.height - 10,
+    width : p.width - img_space,
+    height : p.height - img_space,
     health : 3
   }
 
@@ -63,9 +66,9 @@
   food [0] = {
     x : 0,
     y : cvs.height / 2 - f.height,
-    X_step : Math.floor(Math.random()*5 + 3),
-    Y_step : Math.floor(Math.random()*10 - 5),
-    good : Math.floor(Math.random()*5),
+    X_step : Math.floor(Math.random()*3 + 3),
+    Y_step : Math.floor(Math.random()*12 - 6),
+    good : Math.floor(Math.random()*3),
     width : f.width,
     height : f.height
 
@@ -75,6 +78,9 @@
 
   document.addEventListener("touchmove", clearIntro);
   document.addEventListener("keydown", clearIntro);
+
+  intro.style.left = cvs.width / 3 + "px";
+  intro.style.top = cvs.height / 3 + "px";
 
   function clearIntro(){
     intro.textContent = "";
@@ -90,8 +96,8 @@
 
   function t_move(event){
     console.log(event.touches[0].screenX);
-    player.x = event.touches[0].screenX - cvs.offsetLeft - 100;
-    player.y = event.touches[0].screenY - 200;
+    player.x = event.touches[0].screenX - 2*cvs.offsetLeft - p.width;
+    player.y = event.touches[0].screenY - 2*box - 2*cvs.offsetTop - p.height;
   }
 
   function k_down(event){
@@ -125,6 +131,8 @@
   let t = 0;
 
   function draw(){
+    ctx.canvas.width  = window.innerWidth  - 100;
+    ctx.canvas.height = window.innerHeight - 10;
     //Background
     ctx.fillStyle = "#e1aaff";
     ctx.fillRect(0, 0, cvs.width, 2*box);
@@ -135,8 +143,6 @@
     ctx.fillRect(0, 2*box, cvs.width, cvs.height - 2 * box);
     ctx.strokeRect(0, 2*box, cvs.width, cvs.height - 2 * box);
 
-    //Pinky Lamb
-    ctx.drawImage(p, player.x, player.y, p.width, p.height);
     //Lines
     //console.log("(" + player.x + ", " + player.y + "), ( " + food[0].x + ", " + food[0].y + ")");
     //console.log(collision(player, food[0]));
@@ -165,9 +171,9 @@
         if(player.health == 0){
           ctx.fillStyle = "white";
           ctx.font = "bold 100px Courier"
-          ctx.fillText("GAMEOVER" , 100, cvs.height / 2);
+          ctx.fillText("GAMEOVER" , cvs.width / 4, cvs.height / 2);
           ctx.strokeStyle = "black"
-          ctx.strokeText("GAMEOVER" , 100, cvs.height / 2);
+          ctx.strokeText("GAMEOVER" , cvs.width / 4, cvs.height / 2);
           clearInterval(game);
         }
       }
@@ -180,7 +186,9 @@
       ctx.strokeRect(food[i].x, food[i].y, box, box);*/
     }
 
-    //Pinky Lab Moves
+    //Pinky Lamb
+    ctx.drawImage(p, player.x - img_space/2, player.y - img_space/2, p.width, p.height);
+    //Pinky Lamb Moves
     var step = 10;
     //Changes Direction
     if ( d[0] ) player.x -= step;
@@ -199,16 +207,16 @@
     }
 
     t++;
-    if(t==100){
+    if(t==50){
       t = 0;
       var newFood = {
         x : 0,
         y : cvs.height / 2 - f.height,
-        X_step : Math.floor(Math.random()*5 + 3),
-        Y_step : Math.floor(Math.random()*10 - 5),
+        X_step : Math.floor(Math.random()*3 + 3),
+        Y_step : Math.floor(Math.random()*12 - 6),
         width : f.width,
         height : f.height,
-        good : Math.floor(Math.random()*5),
+        good : Math.floor(Math.random()*3),
 
       }
       food.push(newFood);
