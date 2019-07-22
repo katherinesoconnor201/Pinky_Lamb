@@ -22,10 +22,26 @@
     border-width: 2px;
     background-color: aquamarine; 
     box-shadow: 10px 10px grey;
-}
+  }
+
+  #btn{
+    display: none;
+    position: absolute;
+    left: 400px;
+    top: 100px;
+    width: 200px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: solid;
+    border-width: 2px;
+    background-color: aquamarine; 
+    box-shadow: 10px 10px grey;
+  }
 </style> 
 <body> 
   <p id="intro">Type the letter that appears. Don't let it hit the ground!</p>
+  <button id="btn" onclick=playAgain()> Play Again</button>
 <canvas id="canvas"></canvas>
 <script>
   const cvs = document.getElementById("canvas");
@@ -34,7 +50,7 @@
   ctx.canvas.height = window.innerHeight - 10;
 
   const intro = document.getElementById("intro");
-  const box = 50;
+  const box = cvs.height/12;
   const rx_max = Math.floor(cvs.width / box)-1;
   const ry_max = Math.floor(cvs.height / box)-3;
 
@@ -60,6 +76,10 @@
     intro.textContent = "";
     intro.style.borderStyle = "none";
     intro.style.boxShadow = "none";
+  }
+
+  function playAgain(){
+    window.location.reload();
   }
 
   function random_L(){
@@ -134,9 +154,12 @@
         if(health == 0){
           ctx.fillStyle = "white";
           ctx.font = "bold 100px Courier"
-          ctx.fillText("GAMEOVER" , cvs.width/4, cvs.height / 2);
+          ctx.fillText("GAME OVER" , cvs.width/4, cvs.height / 2);
           ctx.strokeStyle = "black"
-          ctx.strokeText("GAMEOVER" , cvs.width/4, cvs.height / 2);
+          ctx.strokeText("GAME OVER" , cvs.width/4, cvs.height / 2);
+          btn.style.left = cvs.width / 2 - 2*box + "px";
+          btn.style.top = cvs.height / 2 + box +"px";
+          btn.style.display = "block";
           clearInterval(game);
         }
       }
