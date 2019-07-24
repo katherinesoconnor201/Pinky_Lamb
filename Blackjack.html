@@ -89,8 +89,15 @@
 
   const intro = document.getElementById("intro");
   let box = cvs.height/12;
-  let rx_max = Math.floor(cvs.width / box)-1;
-  let ry_max = Math.floor(cvs.height / box)-3;
+  let b1 = document.getElementById("draw_C");
+  let b2 = document.getElementById("compare");
+  let b3 = document.getElementById("hint");
+  b1.style.left = cvs.offsetLeft + box + "px";
+  b2.style.left = cvs.offsetLeft + box*3.5 + "px";
+  b3.style.left = cvs.offsetLeft + box*6 + "px";
+  b1.style.top = cvs.height - 40 + "px";
+  b2.style.top = cvs.height - 40 + "px";
+  b3.style.top = cvs.height - 40 + "px";
 
   let p_hand = [];
   let c_hand = [];
@@ -115,9 +122,10 @@
           value : c_value(num + 1),
           str : c_String(num, suit),
           x : cvs.width / 2 - 2*box,
-          y : cvs.height- box,
-          width : 100,
-          height : 150
+          y : cvs.height - box,
+          width : 2.4*box,
+          height : 3.5*box,
+          image : getImage(num, suit)
         }
         card.push(newCard);
       }
@@ -141,6 +149,20 @@
     return s;
   }
 
+  function getImage(num,suit){
+    const value_str = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
+    const suit_str = ["Hearts", "Clubs", "Spades", "Diamonds" ];
+    let name;
+    if(num==9){
+      name = "10"+ suit_str[suit].substring(0,1);
+    }else{
+      name = value_str[num].substring(0,1) + suit_str[suit].substring(0,1);
+    }
+    console.log(name);
+    let img = new Image();
+    img.src = "images/Cards/" + name + ".png";
+    return img;
+  }
 
   //draws random card
   function drawCard(hand){
@@ -253,42 +275,30 @@
     ctx.fillRect(0, box, cvs.width, cvs.height - box);
     ctx.strokeRect(0, box, cvs.width, cvs.height - box);
 
-    //player's cards
+    //computer's cards
     for(let i = 0; i < c_hand.length; i++){
       //card position 
-      c_hand[i].x = 1.4*box*(i+1) + i*c_hand[i].width;
-      c_hand[i].y = 2*box;
+      c_hand[i].x = box*(i+1) + i*c_hand[i].width;
+      c_hand[i].y = 1.5*box;
       // card style
-      ctx.fillStyle = "#fa9755";
-      ctx.fillRect(c_hand[i].x, c_hand[i].y, c_hand[i].width, c_hand[i].height);
-      ctx.strokeStyle = "white";
-      ctx.strokeRect(c_hand[i].x, c_hand[i].y, c_hand[i].width, c_hand[i].height);
-      ctx.fillStyle = "white";
-      ctx.font = "bold 16px Courier";
-      ctx.fillText(c_hand[i].str, c_hand[i].x - box/2, c_hand[i].y - box/4);
+      ctx.drawImage(c_hand[i].image, c_hand[i].x, c_hand[i].y, c_hand[i].width, c_hand[i].height);
     }
 
     //player's cards
     for(let i = 0; i < p_hand.length; i++){
       //card position 
-      p_hand[i].x = 1.4*box*(i+1) + i*p_hand[i].width;
-      p_hand[i].y = 320;
+      p_hand[i].x = box*(i+1) + i*p_hand[i].width;
+      p_hand[i].y = cvs.height/2 + box;
       // card style
-      ctx.fillStyle = "#fa9755";
-      ctx.fillRect(p_hand[i].x, p_hand[i].y, p_hand[i].width, p_hand[i].height);
-      ctx.strokeStyle = "white";
-      ctx.strokeRect(p_hand[i].x, p_hand[i].y, p_hand[i].width, p_hand[i].height);
-      ctx.fillStyle = "white";
-      ctx.font = "bold 16px Courier";
-      ctx.fillText(p_hand[i].str, p_hand[i].x - box/2, p_hand[i].y - box/4);
+      ctx.drawImage(p_hand[i].image, p_hand[i].x, p_hand[i].y, p_hand[i].width, p_hand[i].height);
     }
    
     ctx.fillStyle = "white";
     ctx.font = "bold " + 0.6*box + "px Courier"
     ctx.fillText("Your Total: " + p_total, 0.25*box, .8*box);
     ctx.fillText("Computer's Total: " + c_total, 6*box, .8*box);
-    ctx.fillText("Wins: " + p_wins, 18*box, .8*box);
-    ctx.fillText("Loses: " + c_wins, 22*box, .8*box);
+    ctx.fillText("Wins: " + p_wins, 17*box, .8*box);
+    ctx.fillText("Loses: " + c_wins, 21*box, .8*box);
     ctx.font = "normal " + 0.3*box + "px Courier"
     ctx.fillText( chance_txt , 12*box, 11.5*box);
 
