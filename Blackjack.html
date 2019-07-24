@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<style>
+  body{
+      background-color:rgb(252, 229, 232);
+  }
+
+  canvas{
+      display: block;
+      margin: 0 auto;
+
+  }
+  #intro{
+    position: absolute;
+    left: 400px;
+    top: 100px;
+    width: 500px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: solid;
+    border-width: 2px;
+    background-color: aquamarine; 
+    box-shadow: 10px 10px grey;
+  }
+  #draw_C{
+    display: block;
+    position: absolute;
+    left: 50px;
+    top: 520px;
+    width: 100px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-color = "black";
+    border-style: solid;
+    border-width: 2px;
+    background-color: aquamarine; 
+    box-shadow: 10px 10px grey;
+  }
+
+  #compare{
+    display: block;
+    position: absolute;
+    left: 200px;
+    top: 520px;
+    width: 100px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-color = "black";
+    border-style: solid;
+    border-width: 2px;
+    background-color: aquamarine; 
+    box-shadow: 10px 10px grey;
+  }
+
+   #hint{
+    display: block;
+    position: absolute;
+    left: 350px;
+    top: 520px;
+    width: 100px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-color = "black";
+    border-style: solid;
+    border-width: 2px;
+    background-color: aquamarine; 
+    box-shadow: 10px 10px grey;
+  }
+
+
+
+
+</style> 
+<body> 
+  <p id="intro">Let's play blackjack. The objective of the game is to get a total of 21. If you go over 21, you will not win. Whomever's total is closest but does not exceeed 21 will win. Click the "draw" button to draw a card. Face cards have a value of 10 and Ace cards have a value of 1. Click the "hint" button to get the probabaility of not going over 21 with your next draw. Click the "compare" button when you are ready to compare your cards with the computer's. Pinky Lamb doesn't normaly gamble...Don't worry! There's nothing to lose but pride in this game of Blackjack!</p>
+  <button id="draw_C" onclick=drawCard(p_hand)> Draw </button>
+  <button id="compare" onclick=Compare()> Compare </button>
+  <button id="hint" onclick=Hint()> Hint </button>
+<canvas id="canvas"></canvas>
+<script>
+  const cvs = document.getElementById("canvas");
+  const ctx = cvs.getContext("2d");
+  ctx.canvas.width  = window.innerWidth  - 100;
+  ctx.canvas.height = window.innerHeight - 10;
+
+  const intro = document.getElementById("intro");
+  let box = cvs.height/12;
+  let rx_max = Math.floor(cvs.width / box)-1;
+  let ry_max = Math.floor(cvs.height / box)-3;
+
+  let p_hand = [];
+  let c_hand = [];
+
+  let p_total = 0;
+  let c_total = 0;
+
+  let win = "";
+  let p_wins = 0;
+  let c_wins = 0;
+
+  let chance_txt = "";
+
+  //creates deck of cards
+  let card = [];
+  newDeck();
+
+  function newDeck(){
+    for(let num = 0; num < 13; num++){
+      for(let suit = 0; suit < 4; suit++){
+        let newCard =  {
+          value : c_value(num + 1),
+          str : c_String(num, suit),
+          x : cvs.width / 2 - 2*box,
+          y : cvs.height- box,
+          width : 100,
+          height : 150
+        }
+        card.push(newCard);
+      }
+    }
+  }
+  
+
+  //returns value of card
+  function c_value(n){
+    if(n>10){
+      n = 10;
+    }
+    return n;
+  }
+
+  //returns name of card
+  function c_String(num, suit){
+    const value_str = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
+    const suit_str = ["Hearts", "Clubs", "Spades", "Diamonds" ];
+    let s = value_str[num] + " of " + suit_str[suit];
+    return s;
+  }
+
+
+  //draws random card
+  function drawCard(hand){
+    clearIntro();
+    chance_txt = "";
+    if(win != ""){
+      playAgain();
+    }else{
+      let r = Math.floor(Math.random()*card.length);
+      hand.push(card[r]);
+      card.splice(r,1);
+      countScores();
+    }
+  }
+
+  function c_drawAll(){
+    while(Calc_chance(c_hand, c_total) >= 40){
+        drawCard(c_hand);
+    }
+  }
+
+  function countScores(){  
+    let tot = 0;
+    for(let i = 0; i < p_hand.length; i++){
+      tot += p_hand[i].value;
+    }
+    p_total = tot;
+
+    tot = 0;
+    for(let i = 0; i < c_hand.length; i++){
+      tot += c_hand[i].value
+    }
+    c_total = tot;
+  }
+
+  //returns chance of drawing a good card
+  function Calc_chance(hand, total){
+    let dif = 21 - total;
+    let good = 0;
+    if(dif>=10){
+      good = 52;
+    }else if (dif>0){
+      for(let i = 0; i < hand.length; i++){
+        if(hand[i].value<=good){good--};
+      }
+      while(dif>0){
+      good += 4;
+      dif--;
+      }
+    }
+    console.log(good);
+    return Math.floor(good/52*100);
+  }
+
+  function Hint(){
+    chance_txt = "There is a " + Calc_chance(p_hand, p_total) + "% chance of drawing a " + (21-p_total) + " or less."
+  }
+  
+  //Checks for the winner
+  function Compare(){
+    clearIntro();
+    c_drawAll();
+    let c_dif = 21 - c_total;
+    let p_dif = 21 - p_total;
+    if( p_dif < 0 && c_dif < 0){
+      win = "Nobody Won!";
+    } else if( p_dif == c_dif){
+      win = "Tie!"
+      p_wins++;
+      c_wins++;
+    }else if( c_dif < 0 || (p_dif < c_dif && p_dif>=0)){
+      win = "You Won!"; 
+      p_wins++;
+    } else{
+      win = "The Computer Won!"; 
+      c_wins++;
+    }
+  }
+
+  document.addEventListener("keydown", clearIntro);
+
+  function clearIntro(){
+    intro.textContent = "";
+    intro.style.borderStyle = "none";
+    intro.style.boxShadow = "none";
+  }
+
+  function playAgain(){
+    clearIntro();
+    p_hand = [];
+    c_hand = [];
+    newDeck();
+    p_total = 0;
+    c_total = 0;
+    win = ""
+  }
+ 
+  let t = 0;
+
+  function draw(){
+    ctx.canvas.width  = window.innerWidth-100;
+    ctx.canvas.height = window.innerHeight-10;
+    //Background
+    ctx.fillStyle = "#006666";
+    ctx.fillRect(0, 0, cvs.width, box);
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 6; 
+    ctx.strokeRect(0 , 0, cvs.width, box);
+    ctx.fillStyle = "#660000";
+    ctx.fillRect(0, box, cvs.width, cvs.height - box);
+    ctx.strokeRect(0, box, cvs.width, cvs.height - box);
+
+    //player's cards
+    for(let i = 0; i < c_hand.length; i++){
+      //card position 
+      c_hand[i].x = 1.4*box*(i+1) + i*c_hand[i].width;
+      c_hand[i].y = 2*box;
+      // card style
+      ctx.fillStyle = "#fa9755";
+      ctx.fillRect(c_hand[i].x, c_hand[i].y, c_hand[i].width, c_hand[i].height);
+      ctx.strokeStyle = "white";
+      ctx.strokeRect(c_hand[i].x, c_hand[i].y, c_hand[i].width, c_hand[i].height);
+      ctx.fillStyle = "white";
+      ctx.font = "bold 16px Courier";
+      ctx.fillText(c_hand[i].str, c_hand[i].x - box/2, c_hand[i].y - box/4);
+    }
+
+    //player's cards
+    for(let i = 0; i < p_hand.length; i++){
+      //card position 
+      p_hand[i].x = 1.4*box*(i+1) + i*p_hand[i].width;
+      p_hand[i].y = 320;
+      // card style
+      ctx.fillStyle = "#fa9755";
+      ctx.fillRect(p_hand[i].x, p_hand[i].y, p_hand[i].width, p_hand[i].height);
+      ctx.strokeStyle = "white";
+      ctx.strokeRect(p_hand[i].x, p_hand[i].y, p_hand[i].width, p_hand[i].height);
+      ctx.fillStyle = "white";
+      ctx.font = "bold 16px Courier";
+      ctx.fillText(p_hand[i].str, p_hand[i].x - box/2, p_hand[i].y - box/4);
+    }
+   
+    ctx.fillStyle = "white";
+    ctx.font = "bold " + 0.6*box + "px Courier"
+    ctx.fillText("Your Total: " + p_total, 0.25*box, .8*box);
+    ctx.fillText("Computer's Total: " + c_total, 6*box, .8*box);
+    ctx.fillText("Wins: " + p_wins, 18*box, .8*box);
+    ctx.fillText("Loses: " + c_wins, 22*box, .8*box);
+    ctx.font = "normal " + 0.3*box + "px Courier"
+    ctx.fillText( chance_txt , 12*box, 11.5*box);
+
+    ctx.fillStyle = "white";
+    ctx.font = "bold 50px Courier"
+    ctx.fillText(win, cvs.width/4, cvs.height / 2);
+
+  };
+
+  //window.requestAnimationFrame(draw);
+  let game = setInterval(draw, 20);
+</script>
+</body>
+</html>
