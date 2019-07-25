@@ -56,6 +56,10 @@
 
   let health = 3;
   let speed = 1;
+  let game_over = "";
+  let t = 0;
+
+  let keepPlaying = true;
 
   let tile = [];
   tile [0] = {
@@ -79,7 +83,14 @@
   }
 
   function playAgain(){
-    window.location.reload();
+    tile = [];
+    health = 3;
+    score= 0;
+    speed = 1;
+    t = 0;
+    game_over = "";
+    keepPlaying = true;
+    btn.style.display = "none";
   }
 
   function random_L(){
@@ -118,8 +129,6 @@
     }
   }
 
-  let t = 0;
-
   function draw(){
     ctx.canvas.width  = window.innerWidth-100;
     ctx.canvas.height = window.innerHeight-10;
@@ -150,22 +159,26 @@
     if(tile[i].y >= cvs.height - tile[i].height){
       health--
       tile.splice(i,1);
-      newTile();
         if(health == 0){
+          game_over = "GAME OVER";
           ctx.fillStyle = "white";
           ctx.font = "bold 100px Courier"
-          ctx.fillText("GAME OVER" , cvs.width/4, cvs.height / 2);
+          ctx.fillText(game_over, cvs.width/4, cvs.height / 2);
           ctx.strokeStyle = "black"
-          ctx.strokeText("GAME OVER" , cvs.width/4, cvs.height / 2);
+          ctx.strokeText(game_over , cvs.width/4, cvs.height / 2);
           btn.style.left = cvs.width / 2 - 2*box + "px";
           btn.style.top = cvs.height / 2 + box +"px";
           btn.style.display = "block";
-          clearInterval(game);
+          keepPlaying = false;
         }
       }
     }
     t++
-    if(t==100) newTile();
+    console.log(t);
+    if(t==300 && keepPlaying==true){
+      newTile();
+      t = 0;
+    } 
 
     ctx.fillStyle = "white";
     ctx.font = "bold 40px Courier"
@@ -174,7 +187,7 @@
   };
 
   //window.requestAnimationFrame(draw);
-  let game = setInterval(draw, 20);
+  timer = setInterval(draw, 20);
 </script>
 </body>
 </html>
