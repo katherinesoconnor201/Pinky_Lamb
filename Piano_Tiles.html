@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <style>
+
   body{
       background-color:rgb(252, 229, 232);
   }
@@ -8,8 +9,8 @@
   canvas{
       display: block;
       margin: 0 auto;
-
   }
+
   #intro{
     position: absolute;
     left: 400px;
@@ -38,6 +39,7 @@
     background-color: aquamarine; 
     box-shadow: 10px 10px grey;
   }
+
 </style> 
 <body> 
   <p id="intro">Type the letter that appears. Don't let it hit the ground!</p>
@@ -48,34 +50,28 @@
   const ctx = cvs.getContext("2d");
   ctx.canvas.width  = window.innerWidth  - 100;
   ctx.canvas.height = window.innerHeight - 10;
-
   const intro = document.getElementById("intro");
-  const box = cvs.height/12;
+  let box = cvs.height/12;
   const rx_max = Math.floor(cvs.width / box)-1;
   const ry_max = Math.floor(cvs.height / box)-3;
-
   let health = 3;
   let speed = 1;
   let game_over = "";
   let t = 0;
-
   let keepPlaying = true;
-
   let tile = [];
+
   tile [0] = {
-    x : Math.floor(box + Math.random()*(cvs.width-2*box)),
+    x : 5 + box*(Math.random()*Math.floor(cvs.width/box-1)),
     y : box,
     step : speed,
     str : random_L(),
     width : 50,
     height : 60
-
   }
 
   let score = 0;
-
   document.addEventListener("keydown", clearIntro);
-
   function clearIntro(){
     intro.textContent = "";
     intro.style.borderStyle = "none";
@@ -91,7 +87,7 @@
     game_over = "";
     keepPlaying = true;
     btn.style.display = "none";
-  }
+    }
 
   function random_L(){
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
@@ -102,7 +98,7 @@
 
   function newTile(){
     var newtile = {
-        x : Math.floor(box + Math.random()*(cvs.width-2*box)),
+        x : 5 + box*(Math.random()*Math.floor(cvs.width/box-1)),
         y : box,
         step : speed,
         str : random_L(),
@@ -128,10 +124,10 @@
       }
     }
   }
-
   function draw(){
     ctx.canvas.width  = window.innerWidth-100;
     ctx.canvas.height = window.innerHeight-10;
+    box = cvs.height/12;
     //Background
     ctx.fillStyle = "#e1aaff";
     ctx.fillRect(0, 0, cvs.width, box);
@@ -141,9 +137,10 @@
     ctx.fillStyle = "#1e0157";
     ctx.fillRect(0, box, cvs.width, cvs.height - box);
     ctx.strokeRect(0, box, cvs.width, cvs.height - box);
-
+    
     //Tiles
     for(let i = 0; i < tile.length; i++){
+      ctx.fontsize = box*0.8 + "px";
       ctx.fillStyle = "#fa9755";
       ctx.fillRect(tile[i].x, tile[i].y, tile[i].width, tile[i].height);
       ctx.strokeStyle = "white";
@@ -151,41 +148,44 @@
       ctx.fillStyle = "white";
       ctx.font = "bold 45px Courier";
       ctx.fillText(tile[i].str, tile[i].x + tile[i].width/4, tile[i].y + tile[i].height*0.7);
-
     //moves tile
       tile[i].y += tile[i].step;
-
     //Checks if tile hits the ground
     if(tile[i].y >= cvs.height - tile[i].height){
       health--
       tile.splice(i,1);
         if(health == 0){
           game_over = "GAME OVER";
-          ctx.fillStyle = "white";
-          ctx.font = "bold 100px Courier"
-          ctx.fillText(game_over, cvs.width/4, cvs.height / 2);
-          ctx.strokeStyle = "black"
-          ctx.strokeText(game_over , cvs.width/4, cvs.height / 2);
-          btn.style.left = cvs.width / 2 - 2*box + "px";
-          btn.style.top = cvs.height / 2 + box +"px";
-          btn.style.display = "block";
           keepPlaying = false;
         }
       }
     }
+
     t++
-    console.log(t);
+    //console.log(t);
     if(t==300 && keepPlaying==true){
       newTile();
       t = 0;
     } 
-
+    //Play Again Button Display
+    btn.style.left = cvs.width / 2 - 2*box + "px";
+    btn.style.top = cvs.height / 2 + box +"px";
+    btn.style.display = "block";
+    //Score Display
     ctx.fillStyle = "white";
     ctx.font = "bold 40px Courier"
+    ctx.fontsize = 0.8*box + "px";
     ctx.fillText("Score: " + score, box, .8*box);
-    ctx.fillText("Lives: " + health, box * 7, .8*box);
+    ctx.fillText("Lives: " + health, box * 9, .8*box);
+    intro.style.left = cvs.width / 2 - 4*box + "px";
+    //Game Over Display
+    ctx.fillStyle = "white";
+    ctx.font = "bold 100px Courier"
+    ctx.fontsize = 2*box + "px";
+    ctx.fillText(game_over, cvs.width/4, cvs.height / 2);
+    ctx.strokeStyle = "black"
+    ctx.strokeText(game_over , cvs.width/4, cvs.height / 2);
   };
-
   //window.requestAnimationFrame(draw);
   timer = setInterval(draw, 20);
 </script>
