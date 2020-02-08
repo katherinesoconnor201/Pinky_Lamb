@@ -156,6 +156,10 @@
       tile.splice(i,1);
         if(health == 0){
           game_over = "GAME OVER";
+          //Play Again Button Display
+          btn.style.left = cvs.width / 2 - 2*box + "px";
+          btn.style.top = cvs.height / 2 + box +"px";
+          btn.style.display = "block";
           keepPlaying = false;
         }
       }
@@ -167,10 +171,6 @@
       newTile();
       t = 0;
     } 
-    //Play Again Button Display
-    btn.style.left = cvs.width / 2 - 2*box + "px";
-    btn.style.top = cvs.height / 2 + box +"px";
-    btn.style.display = "block";
     //Score Display
     ctx.fillStyle = "white";
     ctx.font = "bold 40px Courier"
