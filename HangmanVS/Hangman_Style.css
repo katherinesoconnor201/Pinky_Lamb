@@ -1,0 +1,42 @@
+
+body{
+    background-color: #e1fae2
+}
+
+canvas{
+    display: block;
+    margin: 0 auto;
+}
+
+button{
+  display: none;
+  position: absolute;
+  left: 400px;
+  top: 100px;
+  width: 200px;
+  font-family: Courier;
+  font-weight: bold;
+  font-size: 20px;
+  border-style: solid;
+  border-width: 2px;
+  background-color: #a7eba9; 
+  box-shadow: 10px 10px grey;
+}
+
+#intro{
+  position: absolute;
+  left: 400px;
+  top: 100px;
+  width: 500px;
+  font-family: Courier;
+  font-weight: bold;
+  font-size: 20px;
+  border-style: solid;
+  border-width: 2px;
+  background-color: #a7eba9; 
+  box-shadow: 10px 10px grey;
+}
+
+#PlayAgain{
+  background-color: #a7eba9; 
+}
