@@ -30,13 +30,85 @@ button{
   width: 500px;
   font-family: Courier;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 40px;
+  text-align: center;
   border-style: solid;
   border-width: 2px;
   background-color: #a7eba9; 
   box-shadow: 10px 10px grey;
 }
+#c_lable{
+  position: absolute;
+  left: 400px;
+  top: 100px;
+  width: 500px;
+  font-family: Courier;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  background-color: #a7eba9; 
+  box-shadow: 10px 10px grey;
+  z-index: 0;
+}
 
 #PlayAgain{
   background-color: #a7eba9; 
+}
+
+#head{
+  font-size: 30px;
+  text-align: center;
+  padding: 0px 0px;
+}
+
+.dropdown {
+  font-size: 16px;  
+  border-style: solid;
+  border-width: 2px;
+  margin-left: auto;
+  width: 18%;
+  position: absolute;
+  right: 40px;
+  top: 10px;
+  padding: 8px 8px;
+  background-color: #69b96d;
+  color: white;
+  font-family: Courier;
+  font-weight: bold;
+  margin: 0;
+  z-index: 1;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #adc9b6;
+  font-family: Courier;
+  font-weight: bold;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content option {
+  float: none;
+  color: white;
+  padding: 12px 16px;
+  font-family: Courier;
+  font-weight: bold;
+  display: block;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dropdown-content option:hover {
+  background-color: #71997e;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="stylesheet" href="Hangman_Style.css" type="text/css">
+  <link rel="stylesheet" href="Hangman_Style.css" type="text/css">
 </head>
-<body> 
+
+<body>
   <p id="intro">Let's play hangman!</p>
+  <!-- 
+  <p id="c_lable"> Methacton Teachers</p>
+  -->
   <button id="PlayAgain" onclick=playAgain()> Play Again </button>
   <button id="ShowAnswer" onclick=Show_Answer()> Show Answer </button>
-<canvas id="canvas"></canvas>
-<script src="Hangman_Script.js"></script>
+
+  <div class="dropdown">
+    <div id="head">Categories</div>
+      <div class="dropdown-content">
+        <option onclick=ChangeCategory(Countries)> Countries </option>
+        <option onclick=ChangeCategory(Methacton_Teachers)> Methacton Teachers </option>
+        <option onclick=ChangeCategory(Superheroes)> Superheroes </option>
+        <option onclick=ChangeCategory(Stuffed_Animals)> Stuffed Animals</option>
+        <option onclick=ChangeCategory(US_States)> US States</option>
+
+      </div>
+    </div>
+  </div>
+
+  <canvas id="canvas"></canvas>
+  <script src="Hangman_Script.js"></script>
 </body>
+
 </html>
