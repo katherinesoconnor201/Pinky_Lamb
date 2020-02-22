@@ -8,6 +8,41 @@ body {
 
   }
 
+  button{
+    display: block;
+    position: absolute;
+    width: 200px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: solid;
+    border-width: 2px;
+    background-color: #fdbadc; 
+    box-shadow: 10px 10px grey;
+  }
+  
+  .btn{
+    display: block;
+  }
+
+  button:hover {
+    background-color: #fa3681; 
+  }
+
+  #Single_Player{
+    left: 450px;
+    top: 350px;
+  }
+
+  #Two_Player{
+    left: 450px;
+    top: 400px;
+  }
+  #vs_Computer{
+    left: 450px;
+    top: 450px;
+  }
+
   #intro {
     position: absolute;
     left: 400px;
@@ -21,17 +56,3 @@ body {
     background-color: aquamarine;
     box-shadow: 10px 10px grey;
   }
-
-  #btn {
-    display: none;
-    position: absolute;
-    left: 400px;
-    top: 100px;
-    width: 200px;
-    font-family: Courier;
-    font-weight: bold;
-    font-size: 20px;
-    border-style: solid;
-    border-width: 2px;
-    background-color: aquamarine;
-    box-shadow: 10px 10px grey;
