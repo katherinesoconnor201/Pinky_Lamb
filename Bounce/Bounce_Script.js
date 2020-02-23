@@ -43,10 +43,10 @@ var src2 = ["images/Bear4.png", "images/Bear3.png", "images/Bear2.png", "images/
 
 function Start_Game(str) {
   score = 0;
+  nf = 100;
   Single_Player.style.display = "none";
   Two_Player.style.display = "none";
   vs_Computer.style.display = "none";
-  nf = 100;
   player[0] = {
     x: cvs.width / 2,
     y: cvs.height / 2,
@@ -60,7 +60,6 @@ function Start_Game(str) {
   }
   var comp = (str == "vs_Computer");
   if (str != "Single_Player") {
-    k = ["0", "1", "2", "3"];
     player[1] = {
       x: 3 * box + cvs.width / 2,
       y: cvs.height / 2,
@@ -82,14 +81,13 @@ function Start_Game(str) {
     good: false,
     width: f.width,
     height: f.height
-  
+
   }
 }
 
 
 function drawPlayer(rect1) {
   rect1.image.src = rect1.pics[rect1.health];
-
   ctx.drawImage(rect1.image, rect1.x, rect1.y, rect1.width, rect1.height);
   ctx.fillStyle = "black";
   //ctx.fillText(rect1.x + ", " + rect1.y, rect1.x, rect1.y, 400);
@@ -259,12 +257,15 @@ function movePlayers() {
   if (d[1]) player[0].y -= step;//up
   if (d[2]) player[0].x += step;//right
   if (d[3]) player[0].y += step;//down
-  if (d[4]) player[1].x -= step;//left
-  if (d[5]) player[1].y -= step;//up
-  if (d[6]) player[1].x += step;//right
-  if (d[7]) player[1].y += step;//down
   inBounds(player[0]);
-  inBounds(player[1]);
+  if (player.length > 1) {
+    if (d[4]) player[1].x -= step;//left
+    if (d[5]) player[1].y -= step;//up
+    if (d[6]) player[1].x += step;//right
+    if (d[7]) player[1].y += step;//down
+    inBounds(player[1]);
+  }
+
 }
 
 function draw() {
@@ -272,7 +273,7 @@ function draw() {
   ctx.canvas.height = window.innerHeight - 50;
   drawBackground();
   for (var i = 0; i < player.length; i++) {
-    drawPlayer(player[i]);
+      drawPlayer(player[i]);
   }
 
   //tiles of food
@@ -335,9 +336,9 @@ function draw() {
   //ctx.fillText("Lives: " + player[0].health, box * 7, 1.2 * box);
 
   if (player[0].health <= 0 && player[1].health > 0) {
-    ctx.fillText("Bear Won!", 8*box, 1.2 * box);
-  } else if (player[1].health <= 0 && player[0].health > 0){
-    ctx.fillText("Pinky Lamb Won!", 8*box, 1.2 * box);
+    ctx.fillText("Bear Won!", 8 * box, 1.2 * box);
+  } else if (player[1].health <= 0 && player[0].health > 0) {
+    ctx.fillText("Pinky Lamb Won!", 8 * box, 1.2 * box);
   }
 };
 
