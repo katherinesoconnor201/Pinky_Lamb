@@ -1,0 +1,142 @@
+const cvs = document.getElementById("canvas");
+const ctx = cvs.getContext("2d");
+ctx.canvas.width = window.innerWidth - 100;
+ctx.canvas.height = window.innerHeight - 10;
+const intro = document.getElementById("intro");
+let box = cvs.height / 12;
+const rx_max = Math.floor(cvs.width / box) - 1;
+const ry_max = Math.floor(cvs.height / box) - 3;
+let health = 3;
+let speed = 1;
+let game_over = "";
+let t = 0;
+let keepPlaying = true;
+let tile = [];
+
+tile[0] = {
+  x: 5 + box * (Math.random() * Math.floor(cvs.width / box - 1)),
+  y: box,
+  step: speed,
+  str: random_L(),
+  width: 50,
+  height: 60
+}
+
+let score = 0;
+document.addEventListener("keydown", clearIntro);
+function clearIntro() {
+  intro.textContent = "";
+  intro.style.borderStyle = "none";
+  intro.style.boxShadow = "none";
+}
+
+function playAgain() {
+  tile = [];
+  health = 3;
+  score = 0;
+  speed = 1;
+  t = 0;
+  game_over = "";
+  keepPlaying = true;
+  btn.style.display = "none";
+}
+
+function random_L() {
+  let letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
+  var r = Math.floor(Math.random() * letters.length);
+  var k = letters.substring(r, r + 1);
+  return k;
+}
+
+function newTile() {
+  var newtile = {
+    x: 5 + box * (Math.random() * Math.floor(cvs.width / box - 1)),
+    y: box,
+    step: speed,
+    str: random_L(),
+    width: box,
+    height: box + 10
+  }
+  tile.push(newtile);
+}
+
+//User Controls
+document.addEventListener("keydown", k_down);
+
+function k_down(event) {
+  let k = event.keyCode;
+  let ltr = String.fromCharCode(k);
+  console.log(ltr)
+  for (let i = 0; i < tile.length; i++) {
+    if (ltr == tile[i].str) {
+      tile.splice(i, 1);
+      score++;
+      speed += 0.25;
+      newTile();
+    }
+  }
+}
+function draw() {
+  ctx.canvas.width = window.innerWidth - 100;
+  ctx.canvas.height = window.innerHeight - 10;
+  box = cvs.height / 12;
+  //Background
+  ctx.fillStyle = "#e1aaff";
+  ctx.fillRect(0, 0, cvs.width, box);
+  ctx.strokeStyle = "white";
+  ctx.lineWidth = 6;
+  ctx.strokeRect(0, 0, cvs.width, box);
+  ctx.fillStyle = "#1e0157";
+  ctx.fillRect(0, box, cvs.width, cvs.height - box);
+  ctx.strokeRect(0, box, cvs.width, cvs.height - box);
+
+  //Tiles
+  for (let i = 0; i < tile.length; i++) {
+    ctx.fontsize = box * 0.8 + "px";
+    ctx.fillStyle = "#fa9755";
+    ctx.fillRect(tile[i].x, tile[i].y, tile[i].width, tile[i].height);
+    ctx.strokeStyle = "white";
+    ctx.strokeRect(tile[i].x, tile[i].y, tile[i].width, tile[i].height);
+    ctx.fillStyle = "white";
+    ctx.font = "bold 45px Courier";
+    ctx.fillText(tile[i].str, tile[i].x + tile[i].width / 4, tile[i].y + tile[i].height * 0.7);
+    //moves tile
+    tile[i].y += tile[i].step;
+    //Checks if tile hits the ground
+    if (tile[i].y >= cvs.height - tile[i].height) {
+      health--
+      tile.splice(i, 1);
+      if (health == 0) {
+        game_over = "GAME OVER";
+        //Play Again Button Display
+        btn.style.left = cvs.width / 2 - 2 * box + "px";
+        btn.style.top = cvs.height / 2 + box + "px";
+        btn.style.display = "block";
+        keepPlaying = false;
+      }
+    }
+  }
+
+  t++
+  //console.log(t);
+  if (t == 300 && keepPlaying == true) {
+    newTile();
+    t = 0;
+  }
+  //Score Display
+  ctx.fillStyle = "white";
+  ctx.font = "bold 40px Courier"
+  ctx.fontsize = 0.8 * box + "px";
+  ctx.fillText("Score: " + score, box, .8 * box);
+  ctx.fillText("Lives: " + health, box * 9, .8 * box);
+  intro.style.left = cvs.width / 2 - 4 * box + "px";
+  //Game Over Display
+  ctx.fillStyle = "white";
+  ctx.font = "bold 100px Courier"
+  ctx.fontsize = 2 * box + "px";
+  ctx.fillText(game_over, cvs.width / 4, cvs.height / 2);
+  ctx.strokeStyle = "black"
+  ctx.strokeText(game_over, cvs.width / 4, cvs.height / 2);
+};
+//window.requestAnimationFrame(draw);
+timer = setInterval(draw, 20);

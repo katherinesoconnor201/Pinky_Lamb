@@ -1,22 +1,22 @@
-h2 {
+.title {
     border-color: black;
     background-color: rgb(252, 174, 204);
+    font-family: Courier;
+    font-size: 30px;
+    font-weight: bold;
     text-align: center;
     border-style: solid;
     border-width: 3px;
     width: 600px;
+    height: 10%;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-h2:hover {
-    background-color: rgb(247, 4, 97);
-    box-shadow: 10px 10px grey;
-}
-
-a:link {
-    text-decoration: none;
+.title:hover {
+    background-color: rgb(253, 150, 189);
+    box-shadow: 10px 10px 5px rgba(131, 99, 111, 0.534);
 }
 
 #Pinky_Lamb_img {
@@ -62,6 +62,10 @@ body {
     margin-right: auto;
 }
 
+.Game_Img:hover {
+    box-shadow: 10px 10px 5px rgba(131, 99, 111, 0.534);
+}
+
 
 /*Navigation Bar*/
 
@@ -74,7 +78,7 @@ body {
     position: sticky;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 10px 10px grey;
+    box-shadow: 10px 10px 5px rgba(131, 99, 111, 0.534);
     top: 0;
     width: 50%;
 }
