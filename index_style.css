@@ -133,3 +133,18 @@ body {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.disclaimer {
+    display: none;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.SimBtn:hover+#Stat_disclaimer {
+    display: block;
+}
+
+.Daboo:hover+#Daboo_disclaimer {
+    display: block;
+}
