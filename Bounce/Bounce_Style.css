@@ -1,3 +1,7 @@
+html, body {
+    overflow-y: hidden;
+}
+
 body {
     background-color: rgb(252, 229, 232);
 }
