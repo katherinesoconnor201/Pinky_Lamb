@@ -106,6 +106,9 @@ document.addEventListener("ontouchend", flap);
 document.addEventListener("keydown", flap);
 window.addEventListener('touchstart', flap);
 
+//Stop scrolling on ios...hopefully
+window.addEventListener("touchmove", function(event) { event.preventDefault() });
+
 function flap() {
     player.y -= ystep;
 }
