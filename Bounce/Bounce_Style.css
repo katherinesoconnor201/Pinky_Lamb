@@ -1,58 +1,51 @@
 body {
     background-color: rgb(252, 229, 232);
-  }
+}
 
-  canvas {
+canvas {
     display: block;
     margin: 0 auto;
+}
 
-  }
-
-  button{
+button {
     display: block;
     position: absolute;
+    margin-left: 40%;
+    margin-right: auto;
+    margin-top: 30%;
+    z-index: 1;
     width: 200px;
     font-family: Courier;
     font-weight: bold;
     font-size: 20px;
     border-style: solid;
     border-width: 2px;
-    background-color: #fdbadc; 
+    background-color: #fdbadc;
     box-shadow: 10px 10px grey;
-  }
-  
-  .btn{
-    display: block;
-  }
+}
 
-  button:hover {
-    background-color: #fa3681; 
-  }
+button:hover {
+    background-color: #fa3681;
+}
 
-  #Single_Player{
-    left: 450px;
-    top: 350px;
-  }
+#Two_Player {
+    top: 8%;
+}
 
-  #Two_Player{
-    left: 450px;
-    top: 400px;
-  }
-  #vs_Computer{
-    left: 450px;
-    top: 450px;
-  }
+#vs_Computer {
+    top: 15%;
+}
 
-  #intro {
+#intro {
     position: absolute;
-    left: 400px;
-    top: 100px;
-    width: 500px;
+    left: 30%;
+    top: 10%;
+    width: 40%;
     font-family: Courier;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 130%;
     border-style: solid;
     border-width: 2px;
     background-color: aquamarine;
     box-shadow: 10px 10px grey;
-  }
+}
