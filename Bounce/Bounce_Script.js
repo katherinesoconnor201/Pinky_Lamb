@@ -178,6 +178,7 @@ function clearIntro() {
 let d = [];
 window.addEventListener("touchstart", t_move);
 window.addEventListener("touchmove", t_move);
+window.addEventListener("touchmove", function(event) { event.preventDefault() });
 window.addEventListener("touchend", t_move);
 document.addEventListener("keydown", k_down);
 document.addEventListener("keyup", k_up);
