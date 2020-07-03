@@ -1,3 +1,8 @@
+html,
+body {
+    overflow-y: hidden;
+    position: fixed;
+}
 
 body{
     background-color: #fcc9c5
