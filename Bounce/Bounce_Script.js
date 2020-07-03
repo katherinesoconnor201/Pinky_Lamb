@@ -183,9 +183,7 @@ document.addEventListener("keydown", k_down);
 document.addEventListener("keyup", k_up);
 
 //Stop scrolling on ios...hopefully
-window.addEventListener("touchstart", function(event) { event.preventDefault() });
 window.addEventListener("touchmove", function(event) { event.preventDefault() });
-window.addEventListener("touchend", function(event) { event.preventDefault() });
 
 function t_move(event) {
     //player[0].x = event.touches[0].screenX - cvs.offsetLeft - player[0].width / 2;
