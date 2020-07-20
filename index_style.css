@@ -19,23 +19,17 @@
     box-shadow: 10px 10px 5px rgba(131, 99, 111, 0.534);
 }
 
-#Pinky_Lamb_img {
+#PinkyPlanet {
     display: block;
     width: 30%;
     margin-left: auto;
     margin-right: auto;
     height: 20%;
+    transition: transform 10s;
 }
 
-#Pinky_Lamb_img:hover {
-    animation-name: rotate_lamb;
-    animation-duration: 2s;
-}
-
-@keyframes rotate_lamb {
-    100% {
-        transform: rotate(360deg)
-    }
+#PinkyPlanet:hover {
+    transform: rotate(720deg);
 }
 
 body {
