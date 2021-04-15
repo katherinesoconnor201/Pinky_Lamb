@@ -7,7 +7,7 @@ var box = cvs.height / 12;
 var step = box / 5;
 let score = 0;
 let t = 0; // increases every 0.1 seconds
-var nf = -100; // when t == nf, a new food is genrated
+var nf = 100; // when t == nf, a new food is genrated
 const rx_max = Math.floor(cvs.width / box) - 1;
 const ry_max = Math.floor(cvs.height / box) - 3;
 
